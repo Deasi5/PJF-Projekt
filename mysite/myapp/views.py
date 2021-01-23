@@ -4,18 +4,30 @@ from .models import Product, Meal
 from django.urls import reverse
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
+import requests
 # Create your views here.
-
 
 
 @login_required()
 def home(request):
-    return render(request, 'myapp/home.html')
+    ingredients = loadData()
+    food = []
+    for ingredient in ingredients['results']:
+        food.append(ingredient)
+
+    context = {
+        'ingredient': food
+    }
+    return render(request, 'myapp/home.html', context)
 
 
 def details(request):
     return render(request, 'myapp/detail.html')
 
+
+def loadData():
+    response = requests.get('https://api.spoonacular.com/food/ingredients/search?apiKey=3ef1f3b4475f4a46a5347c6f8443b2d4&query=chi&number=40')
+    return response.json()
 
 # def index(request):
 #     product_list = Product.objects.order_by('-product_name')[0:]

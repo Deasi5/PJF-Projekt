@@ -16,8 +16,12 @@
     </tr>
   </thead>
   <tbody>
-    <tr class="clickable-row" data-href="{% url 'myapp:detail' %}">
+  {% for food in  ingredient%}
+    <tr data-href="{% url 'myapp:detail' %}">
+    <td>{{ food.id }}</td>
+    <td>{{ food.name }}</td>
     </tr>
+  {% endfor %}
   </tbody>
 </table>
     <div class="d-grid gap-2 d-md-flex justify-content-md-end">
@@ -26,6 +30,16 @@
     </article>
 
     <script>
+
+    document.addEventListener("DOMContentLoaded", () => {
+        const rows = document.querySelectorAll("tr[data-href]")
+
+        rows.forEach( row => {
+            row.addEventListener("click", () => {
+                window.location.href = row.dataset.href
+            })
+        })
+    })
 
     async function loadIngredients() {
         var urlName = 'https://api.spoonacular.com/food/ingredients/search?apiKey=3ef1f3b4475f4a46a5347c6f8443b2d4&query='+(document.getElementById('ingredient').value)+'&number=30'
