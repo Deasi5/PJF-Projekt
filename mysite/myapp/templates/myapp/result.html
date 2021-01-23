@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Result</title>
+</head>
+<body>
+    <h1>{{ product.product_name }}</h1>
+
+    <ul>
+        {% for meal in product.meal_set.all %}
+        <li>{{ meal.meal_name }} -- {{ meal.choices }} choice {{ meal.choices|pluralize }}</li>
+        {% endfor %}
+    </ul>
+
+    <a href="{% url 'myapp:detail' product.id %}">Do you wanna choose again?</a>
+
+</body>
+</html>

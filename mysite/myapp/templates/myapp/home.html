@@ -1,0 +1,53 @@
+{% extends "myapp/base.html" %}
+{% block content %}
+    <article class="media content-section">
+    <div class="article-metadata">
+        <h1>Pick your dinner for today!</h1>
+    </div>
+    <div class="input-group mb-3">
+    <input type="text" id="ingredient" class="form-control" placeholder="Enter Ingredient" aria-label="Recipient's username" aria-describedby="button-addon2">
+    <button class="btn btn-outline-secondary" type="button" id="button-addon2" onclick="loadIngredients()">Search for ingredients</button>
+    </div>
+    <table class="table table-striped" id="ingredientsTable">
+      <thead>
+    <tr>
+        <th scope="col">Ingredient ID</th>
+      <th scope="col">Ingredient Name</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr class="clickable-row" data-href="{% url 'myapp:detail' %}">
+    </tr>
+  </tbody>
+</table>
+    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+  <button type="button" class="btn btn-outline-success">Search for recipie</button>
+</div>
+    </article>
+
+    <script>
+
+    async function loadIngredients() {
+        var urlName = 'https://api.spoonacular.com/food/ingredients/search?apiKey=3ef1f3b4475f4a46a5347c6f8443b2d4&query='+(document.getElementById('ingredient').value)+'&number=30'
+        console.log(urlName)
+        const response = await fetch(urlName, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  });
+        const items = await response.json(); //extract JSON from the http response
+         console.log(items)
+        const table = document.getElementById("ingredientsTable")
+
+        items.results.forEach( item => {
+            let row = table.insertRow();
+            let id = row.insertCell(0);
+            id.innerHTML = item.id;
+            let name = row.insertCell(1);
+            name.innerHTML = item.name;
+            })
+    }
+
+    </script>
+{% endblock content %}
