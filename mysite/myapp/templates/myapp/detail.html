@@ -1,0 +1,20 @@
+{% extends "myapp/base.html" %}
+{% block content %}
+<div class="content-section">
+    <div class="tile">
+        <span>
+            {{product.name}}
+        </span>
+    </div>
+    <section class="details">
+        <div class='image-container'>
+            <img src="{{image}}" alt={{image.image_name}} />
+        </div>
+        <div>
+            {% for nutrient in product.nutrients.objects.all %}
+            <span>{{nutrient}}</span>
+            {% endfor %}
+        </div>
+    </section>
+</div>
+{% endblock content %}

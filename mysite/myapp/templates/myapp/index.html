@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+{% if product_list %}
+<ul>
+    <h1>List of products:</h1>
+    {% for product in product_list %}
+    <li><a href="{% url 'myapp:detail' product.id %}">{{ product.product_name }}</a></li>
+    {% endfor %}
+</ul>
+{% else %}
+    <p>No products are available!</p>
+{% endif %}
+</body>
+</html>

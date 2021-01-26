@@ -1,0 +1,20 @@
+{% extends "myapp/base.html" %}
+{% block content %}
+    <div class="content-section">
+        <form method="POST">
+            {% csrf_token %}
+            <fieldset class="form-group">
+                <legend class="border-bottom mb-4">Log in!</legend>
+                {{ form.as_p }}
+            </fieldset>
+             <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+            <button type="submit" class="btn btn-outline-success" >Log In</button>
+            </div>
+        </form>
+        <div class="border-top pt-3">
+            <small class="text-muted">
+                Need An Account? <a class="ml-2" href="{% url 'myapp:register'%}">Sign Up Now</a>
+            </small>
+        </div>
+    </div>
+{% endblock content %}

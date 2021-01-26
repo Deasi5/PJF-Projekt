@@ -1,0 +1,36 @@
+{% extends "myapp/base.html" %}
+{% block content %}
+<div class="content-section">
+    <div class="tile">
+        <span>
+            Przepisy dla produktów:
+            {% for product in products %}
+            <span>
+                {{product.name}},
+            </span>
+            {% endfor %}
+        </span>
+    </div>
+    <section class="recipes">
+        {% for recipe in recipes %}
+        <div class="recipe border-bottom p-2 pb-3">
+            <div class="d-block">
+                <p class="recipe-title">
+                    <span>
+                        {{recipe.title}}
+                    </span>
+                </p>
+                <img src={{recipe.image}} />
+            </div>
+            <div>
+                Brakuje:<br />
+                {% for missed_ingredient in recipe.missed_ingredients %}
+                <span>{{missed_ingredient}}<br /></span>
+                {% endfor %}
+            </div>
+        </div>
+        {% endfor %}
+    </section>
+
+</div>
+{% endblock content %}
