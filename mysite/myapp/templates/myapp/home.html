@@ -2,31 +2,31 @@
 {% block content %}
 <article class="media content-section">
   <div class="article-metadata">
-    <h1>Let's compose your dinner!</h1>
+    <h1>Pick your dinner for today!</h1>
   </div>
   <div class="input-group mb-3">
     <form method="GET" action="search_ingredients">
       <input type="text" name="search_string" value="{{search_string|escape}}" id="ingredient" class="form-control"
         placeholder="Enter Ingredient" aria-label="Recipient's username" aria-describedby="button-addon2">
       <button class="btn btn-outline-secondary" type="submit" id="button-addon2">
-        Search for products
+        Search for Products
       </button>
     </form>
   </div>
   <section>
     <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-      <a href="{% url 'myapp:search_recipes' %}">
+      <a href="{% url 'myapp:search_recipes' %}" style=" text-decoration: none">
         <button type="button" id="recipes-button" class="btn btn-outline-success"
           url="{% url 'myapp:search_recipes' %}">
-          Search for recipe
+          Search for recipie
         </button>
       </a>
     </div>
 
     <div class='product-list'>
-      {%for entry in list_entries %}
+      {%for entry in entries %}
       <div class="p-2">
-        <a href="{% url 'myapp:remove_product' entry.product.api_id %}">
+        <a href="{% url 'myapp:remove_product' entry.product.api_id %}" style="text-decoration: none">
           <div type="button" class="btn btn-danger">
             Remove
           </div>
@@ -50,14 +50,14 @@
         <td>{{ product.api_id }}</td>
         <td>{{ product.name }}</td>
         <td>
-          <a href="{% url 'myapp:add_product' product.api_id %}">
+          <a href="{% url 'myapp:add_product' product.api_id %}" style="text-decoration: none">
             <button class="btn btn-success">
               Add
             </button>
           </a>
         </td>
         <td>
-          <a href="{% url 'myapp:detail' product.api_id %}">
+          <a href="{% url 'myapp:detail' product.api_id %} " style="text-decoration: none">
             <button class="btn btn-primary">
               Detail
             </button>

@@ -11,7 +11,7 @@
             <img src="{{image}}" alt={{image.image_name}} />
         </div>
         <div>
-            {% for nutrient in product.nutrients.objects.all %}
+            {% for nutrient in nutrients %}
             <span>{{nutrient}}</span></br>
             {% endfor %}
         </div>

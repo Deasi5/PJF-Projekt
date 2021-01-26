@@ -12,11 +12,13 @@ urlpatterns = [
     path('logout/', auth_views.LogoutView.as_view(template_name='users/logout.html'), name='logout'),
 
     path('', views.home, name='home'),
-    path('add_product/<int:pk>/', views.add_product, name='add_product'),
-    path('remove_product/<int:pk>/', views.remove_product, name='remove_product'),
-    path('detail/<int:pk>/', views.detail, name='detail'),
+    path('add_product/<int:api_id>/', views.add_product, name='add_product'),
+    path('remove_product/<int:api_id>/',
+         views.remove_product, name='remove_product'),
+    path('detail/<int:api_id>/', views.detail, name='detail'),
     path('search_recipes/', views.search_recipes, name='search_recipes'),
-    path('search_ingredients/', views.search_ingredients, name='search_ingredients'),
+    path('search_ingredients/', views.search_ingredients,
+         name='search_ingredients'),
 ]
 
 for url in urlpatterns:
