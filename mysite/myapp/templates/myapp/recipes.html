@@ -3,12 +3,13 @@
 <div class="content-section">
     <div class="tile">
         <span>
-            Przepisy dla produktów:
+        <strong>Recipes for products:
             {% for product in products %}
             <span>
                 {{product.name}},
             </span>
             {% endfor %}
+        </strong>
         </span>
     </div>
     <section class="recipes">
@@ -23,7 +24,7 @@
                 <img src={{recipe.image}} />
             </div>
             <div>
-                Brakuje:<br />
+                <strong>What you need else:</strong><br />
                 {% for missed_ingredient in recipe.missed_ingredients %}
                 <span>{{missed_ingredient}}<br /></span>
                 {% endfor %}

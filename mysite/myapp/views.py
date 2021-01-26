@@ -5,13 +5,13 @@ from django.urls import reverse
 from django.shortcuts import render,redirect
 from django.contrib.auth.decorators import login_required
 import requests
-from .mock import mock
+#from .mock import mock
 
 # Create your views here.
 import json
 API_KEY = 'apiKey=94e5fa23563543108f33973794b71eb8'
 DATA_URL = f'https://api.spoonacular.com/food/ingredients/search?{API_KEY}&query=a&number=20'
-IMAGE_URL = 'https://spoonacular.com/cdn/ingredients_100x100/'
+IMAGE_URL = 'https://spoonacular.com/cdn/ingredients_250x250/'
 RECIPES_URL=f'https://api.spoonacular.com/recipes/findByIngredients?{API_KEY}&ingredients='
 SEARCH_URL = 'https://api.spoonacular.com/food/ingredients/search?apiKey=94e5fa23563543108f33973794b71eb8&query='
 AMOUNT = 100
@@ -40,14 +40,18 @@ def get_data()->dict:
 @login_required()
 def home(request, *args, **kwargs):
     if not (data:=request.session.get('data',None)):
-        data = mock
-        # data = get_data()
+        # data = mock
+        data = get_data()
 
     products = data_to_products(data)
     list_entries = ProductListEntry.objects.filter(user=request.user)
+    #entries = ProductListEntry.objects.filter(user=request.user)    
+    #for product, entry in zip(products, entries):                   
+    #    entry.product = product                                     
     context = {
         'products': products,
         'list_entries': list_entries
+    #    'entries': entries                                         
     }
     return render(request, 'myapp/home.html', context)
 
